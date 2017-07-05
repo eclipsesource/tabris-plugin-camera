@@ -19,59 +19,32 @@ description: Take pictures with the device camera.
 #         KIND, either express or implied.  See the License for the
 #         specific language governing permissions and limitations
 #         under the License.
+#
+#  Modifications for Tabris.js by EclipseSource Inc.
 -->
 
-|Android 4.4|Android 5.1|Android 6.0|iOS 9.3|iOS 10.0|Windows 10 Store|Travis CI|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=android-4.4,PLUGIN=cordova-plugin-camera)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=android-4.4,PLUGIN=cordova-plugin-camera/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=android-5.1,PLUGIN=cordova-plugin-camera)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=android-5.1,PLUGIN=cordova-plugin-camera/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=android-6.0,PLUGIN=cordova-plugin-camera)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=android-6.0,PLUGIN=cordova-plugin-camera/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=ios-9.3,PLUGIN=cordova-plugin-camera)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=ios-9.3,PLUGIN=cordova-plugin-camera/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=ios-10.0,PLUGIN=cordova-plugin-camera)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=ios-10.0,PLUGIN=cordova-plugin-camera/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=windows-10-store,PLUGIN=cordova-plugin-camera)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=windows-10-store,PLUGIN=cordova-plugin-camera/)|[![Build Status](https://travis-ci.org/apache/cordova-plugin-camera.svg?branch=master)](https://travis-ci.org/apache/cordova-plugin-camera)
+# tabris-plugin-camera
 
-# cordova-plugin-camera
+This is a fork of [cordova-plugin-camera](https://github.com/apache/cordova-plugin-camera/commit/3b8f64e330df7f1b9d5088fd1a3f7f3e6193c83c), with adjustments made for compatibility with the [Tabris.js](http://tabrisjs.com/) framework.
 
 This plugin defines a global `navigator.camera` object, which provides an API for taking pictures and for choosing images from
 the system's image library.
 
-Although the object is attached to the global scoped `navigator`, it is not available until after the `deviceready` event.
-
-    document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() {
-        console.log(navigator.camera);
-    }
-
-
 ## Installation
 
-This requires cordova 5.0+
+You can add this to your Tabris.js project by includin the followin line in your `config.xml`:
 
-    cordova plugin add cordova-plugin-camera
-Older versions of cordova can still install via the __deprecated__ id
-
-    cordova plugin add org.apache.cordova.camera
-It is also possible to install via repo url directly ( unstable )
-
-    cordova plugin add https://github.com/apache/cordova-plugin-camera.git
-
+```xml
+<plugin name="tabris-plugin-camera" spec="https://github.com/eclipsesource/tabris-plugin-camera.git" />
+```
 
 ## How to Contribute
 
-Contributors are welcome! And we need your contributions to keep the project moving forward. You can [report bugs](https://issues.apache.org/jira/issues/?jql=project%20%3D%20CB%20AND%20status%20in%20(Open%2C%20%22In%20Progress%22%2C%20Reopened)%20AND%20resolution%20%3D%20Unresolved%20AND%20component%20%3D%20%22cordova-plugin-camera%22%20ORDER%20BY%20priority%20DESC%2C%20summary%20ASC%2C%20updatedDate%20DESC), improve the documentation, or [contribute code](https://github.com/apache/cordova-plugin-camera/pulls).
+Contributors are welcome! And we need your contributions to keep the project moving forward. You can [report bugs](https://github.com/eclipsesource/tabris-plugin-camera/issues/new) or [contribute code](https://github.com/eclipsesource/tabris-plugin-camera/pulls).
 
-There is a specific [contributor workflow](http://wiki.apache.org/cordova/ContributorWorkflow) we recommend. Start reading there. More information is available on [our wiki](http://wiki.apache.org/cordova).
-
-:warning: **Found an issue?** File it on [JIRA issue tracker](https://issues.apache.org/jira/issues/?jql=project%20%3D%20CB%20AND%20status%20in%20(Open%2C%20%22In%20Progress%22%2C%20Reopened)%20AND%20resolution%20%3D%20Unresolved%20AND%20component%20%3D%20%22cordova-plugin-camera%22%20ORDER%20BY%20priority%20DESC%2C%20summary%20ASC%2C%20updatedDate%20DESC).
-
-**Have a solution?** Send a [Pull Request](https://github.com/apache/cordova-plugin-camera/pulls).
-
-In order for your changes to be accepted, you need to sign and submit an Apache [ICLA](http://www.apache.org/licenses/#clas) (Individual Contributor License Agreement). Then your name will appear on the list of CLAs signed by [non-committers](https://people.apache.org/committer-index.html#unlistedclas) or [Cordova committers](http://people.apache.org/committers-by-project.html#cordova).
+In order for your changes to be accepted, you need to add yourself as a contributer in the license heady of every modified file.
 
 **And don't forget to test and document your code.**
-
-
-## This documentation is generated by a tool
-
-:warning: Run `npm install` in the plugin repo to enable automatic docs generation if you plan to send a PR.  
-[jsdoc-to-markdown](https://www.npmjs.com/package/jsdoc-to-markdown) is used to generate the docs.  
-Documentation consists of template and API docs produced from the plugin JS code and should be regenerated before each commit (done automatically via [husky](https://github.com/typicode/husky), running `npm run gen-docs` script as a `precommit` hook - see `package.json` for details).
-
 
 
 ### iOS Quirks
@@ -162,14 +135,8 @@ than `DATA_URL`.
 __Supported Platforms__
 
 - Android
-- BlackBerry
-- Browser
-- Firefox
-- FireOS
 - iOS
 - Windows
-- WP8
-- Ubuntu
 
 More examples [here](#camera-getPicture-examples). Quirks [here](#camera-getPicture-quirks).
 
@@ -422,7 +389,7 @@ Take a photo and retrieve the image's file location:
     }
 
     function onFail(message) {
-        alert('Failed because: ' + message);
+        console.log('Failed because: ' + message);
     }
 
 Take a photo and retrieve it as a Base64-encoded image:
@@ -443,7 +410,7 @@ Take a photo and retrieve it as a Base64-encoded image:
     }
 
     function onFail(message) {
-        alert('Failed because: ' + message);
+        console.log('Failed because: ' + message);
     }
 
 #### Preferences (iOS)
@@ -451,12 +418,6 @@ Take a photo and retrieve it as a Base64-encoded image:
 -  __CameraUsesGeolocation__ (boolean, defaults to false). For capturing JPEGs, set to true to get geolocation data in the EXIF header. This will trigger a request for geolocation permissions if set to true.
 
         <preference name="CameraUsesGeolocation" value="false" />
-
-#### Amazon Fire OS Quirks <a name="camera-getPicture-quirks"></a>
-
-Amazon Fire OS uses intents to launch the camera activity on the device to capture
-images, and on phones with low memory, the Cordova activity may be killed.  In this
-scenario, the image may not appear when the Cordova activity is restored.
 
 #### Android Quirks
 
@@ -469,56 +430,8 @@ would be passed to the callbacks (either the URI/URL or an error message). Check
 the `pendingResult.pluginStatus` to determine whether or not the call was
 successful.
 
-#### Browser Quirks
-
-Can only return photos as Base64-encoded image.
-
-#### Firefox OS Quirks
-
-Camera plugin is currently implemented using [Web Activities][web_activities].
-
-#### iOS Quirks
-
-Including a JavaScript `alert()` in either of the callback functions
-can cause problems.  Wrap the alert within a `setTimeout()` to allow
-the iOS image picker or popover to fully close before the alert
-displays:
-
-    setTimeout(function() {
-        // do your thing here!
-    }, 0);
-
-#### Windows Phone 7 Quirks
-
-Invoking the native camera application while the device is connected
-via Zune does not work, and triggers an error callback.
-
-#### Windows quirks
-
-On Windows Phone 8.1 using `SAVEDPHOTOALBUM` or `PHOTOLIBRARY` as a source type causes application to suspend until file picker returns the selected image and
-then restore with start page as defined in app's `config.xml`. In case when `camera.getPicture` was called from different page, this will lead to reloading
-start page from scratch and success and error callbacks will never be called.
-
-To avoid this we suggest using SPA pattern or call `camera.getPicture` only from your app's start page.
-
-More information about Windows Phone 8.1 picker APIs is here: [How to continue your Windows Phone app after calling a file picker](https://msdn.microsoft.com/en-us/library/windows/apps/dn720490.aspx)
-
-#### Tizen Quirks
-
-Tizen only supports a `destinationType` of
-`Camera.DestinationType.FILE_URI` and a `sourceType` of
-`Camera.PictureSourceType.PHOTOLIBRARY`.
-
 
 ## `CameraOptions` Errata <a name="CameraOptions-quirks"></a>
-
-#### Amazon Fire OS Quirks
-
-- Any `cameraDirection` value results in a back-facing photo.
-
-- Ignores the `allowEdit` parameter.
-
-- `Camera.PictureSourceType.PHOTOLIBRARY` and `Camera.PictureSourceType.SAVEDPHOTOALBUM` both display the same photo album.
 
 #### Android Quirks
 
@@ -530,38 +443,6 @@ Tizen only supports a `destinationType` of
 
 - Ignores the `encodingType` parameter if the image is unedited (i.e. `quality` is 100, `correctOrientation` is false, and no `targetHeight` or `targetWidth` are specified). The `CAMERA` source will always return the JPEG file given by the native camera and the `PHOTOLIBRARY` and `SAVEDPHOTOALBUM` sources will return the selected file in its existing encoding.
 
-#### BlackBerry 10 Quirks
-
-- Ignores the `quality` parameter.
-
-- Ignores the `allowEdit` parameter.
-
-- `Camera.MediaType` is not supported.
-
-- Ignores the `correctOrientation` parameter.
-
-- Ignores the `cameraDirection` parameter.
-
-#### Firefox OS Quirks
-
-- Ignores the `quality` parameter.
-
-- `Camera.DestinationType` is ignored and equals `1` (image file URI)
-
-- Ignores the `allowEdit` parameter.
-
-- Ignores the `PictureSourceType` parameter (user chooses it in a dialog window)
-
-- Ignores the `encodingType`
-
-- Ignores the `targetWidth` and `targetHeight`
-
-- `Camera.MediaType` is not supported.
-
-- Ignores the `correctOrientation` parameter.
-
-- Ignores the `cameraDirection` parameter.
-
 #### iOS Quirks
 
 - When using `destinationType.FILE_URI`, photos are saved in the application's temporary directory. The contents of the application's temporary directory is deleted when the application ends.
@@ -569,29 +450,6 @@ Tizen only supports a `destinationType` of
 - When using `destinationType.NATIVE_URI` and `sourceType.CAMERA`, photos are saved in the saved photo album regardless on the value of `saveToPhotoAlbum` parameter.
 
 - When using `destinationType.NATIVE_URI` and `sourceType.PHOTOLIBRARY` or `sourceType.SAVEDPHOTOALBUM`, all editing options are ignored and link is returned to original picture.
-
-#### Tizen Quirks
-
-- options not supported
-
-- always returns a FILE URI
-
-#### Windows Phone 7 and 8 Quirks
-
-- Ignores the `allowEdit` parameter.
-
-- Ignores the `correctOrientation` parameter.
-
-- Ignores the `cameraDirection` parameter.
-
-- Ignores the `saveToPhotoAlbum` parameter.  IMPORTANT: All images taken with the WP8/8 Cordova camera API are always copied to the phone's camera roll.  Depending on the user's settings, this could also mean the image is auto-uploaded to their OneDrive.  This could potentially mean the image is available to a wider audience than your app intended. If this is a blocker for your application, you will need to implement the CameraCaptureTask as [documented on MSDN][msdn_wp8_docs]. You may also comment or up-vote the related issue in the [issue tracker][wp8_bug].
-
-- Ignores the `mediaType` property of `cameraOptions` as the Windows Phone SDK does not provide a way to choose videos from PHOTOLIBRARY.
-
-[android_lifecycle]: http://cordova.apache.org/docs/en/dev/guide/platforms/android/lifecycle.html
-[web_activities]: https://hacks.mozilla.org/2013/01/introducing-web-activities/
-[wp8_bug]: https://issues.apache.org/jira/browse/CB-2083
-[msdn_wp8_docs]: http://msdn.microsoft.com/en-us/library/windowsphone/develop/hh394006.aspx
 
 ## Sample: Take Pictures, Select Pictures from the Picture Library, and Get Thumbnails <a name="sample"></a>
 
@@ -624,8 +482,6 @@ function setOptions(srcType) {
     return options;
 }
 ```
-
-Typically, you want to use a FILE_URI instead of a DATA_URL to avoid most memory issues. JPEG is the recommended encoding type for Android.
 
 You take a picture by passing in the options object to `getPicture`, which takes a CameraOptions object as the third argument. When you call `setOptions`, pass `Camera.PictureSourceType.CAMERA` as the picture source.
 
@@ -740,54 +596,5 @@ function openFilePicker(selection) {
         console.debug("Unable to obtain picture: " + error, "app");
 
     }, options);
-}
-```
-
-## Take a picture and get a FileEntry Object <a name="convert"></a>
-
-If you want to do something like copy the image to another location, or upload it somewhere using the FileTransfer plugin, you need to get a FileEntry object for the returned picture. To do that, call `window.resolveLocalFileSystemURL` on the file URI returned by the Camera app. If you need to use a FileEntry object, set the `destinationType` to `Camera.DestinationType.FILE_URI` in your CameraOptions object (this is also the default value).
-
->*Note* You need the [File plugin](https://www.npmjs.com/package/cordova-plugin-file) to call `window.resolveLocalFileSystemURL`.
-
-Here is the call to `window.resolveLocalFileSystemURL`. The image URI is passed to this function from the success callback of `getPicture`. The success handler of `resolveLocalFileSystemURL` receives the FileEntry object.
-
-```js
-function getFileEntry(imgUri) {
-    window.resolveLocalFileSystemURL(imgUri, function success(fileEntry) {
-
-        // Do something with the FileEntry object, like write to it, upload it, etc.
-        // writeFile(fileEntry, imgUri);
-        console.log("got file: " + fileEntry.fullPath);
-        // displayFileData(fileEntry.nativeURL, "Native URL");
-
-    }, function () {
-      // If don't get the FileEntry (which may happen when testing
-      // on some emulators), copy to a new FileEntry.
-        createNewFileEntry(imgUri);
-    });
-}
-```
-
-In the example shown in the preceding code, you call the app's `createNewFileEntry` function if you don't get a valid FileEntry object. The image URI returned from the Camera app should result in a valid FileEntry, but platform behavior on some emulators may be different for files returned from the file picker.
-
->*Note* To see an example of writing to a FileEntry, see the [File plugin README](https://www.npmjs.com/package/cordova-plugin-file).
-
-The code shown here creates a file in your app's cache (in sandboxed storage) named `tempFile.jpeg`. With the new FileEntry object, you can copy the image to the file or do something else like upload it.
-
-```js
-function createNewFileEntry(imgUri) {
-    window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function success(dirEntry) {
-
-        // JPEG file
-        dirEntry.getFile("tempFile.jpeg", { create: true, exclusive: false }, function (fileEntry) {
-
-            // Do something with it, like write to it, upload it, etc.
-            // writeFile(fileEntry, imgUri);
-            console.log("got file: " + fileEntry.fullPath);
-            // displayFileData(fileEntry.fullPath, "File copied to");
-
-        }, onErrorCreateFile);
-
-    }, onErrorResolveUrl);
 }
 ```
