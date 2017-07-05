@@ -17,7 +17,8 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ * Modifications for Tabris.js by EclipseSource Inc.
+ */
 
 /*jshint unused:true, undef:true, browser:true */
 /*global Windows:true, URL:true, module:true, require:true, WinJS:true */
