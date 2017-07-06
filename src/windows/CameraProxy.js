@@ -76,63 +76,6 @@ var DEFAULT_ASPECT_RATIO = '1.8';
 // Highest possible z-index supported across browsers. Anything used above is converted to this value.
 var HIGHEST_POSSIBLE_Z_INDEX = 2147483647;
 
-// Resize method
-function resizeImage(successCallback, errorCallback, file, targetWidth, targetHeight, encodingType) {
-    var tempPhotoFileName = "";
-    var targetContentType = "";
-
-    if (encodingType == Camera.EncodingType.PNG) {
-        tempPhotoFileName = "camera_cordova_temp_return.png";
-        targetContentType = "image/png";
-    } else {
-        tempPhotoFileName = "camera_cordova_temp_return.jpg";
-        targetContentType = "image/jpeg";
-    }
-
-    var storageFolder = getAppData().localFolder;
-    file.copyAsync(storageFolder, file.name, Windows.Storage.NameCollisionOption.replaceExisting)
-        .then(function (storageFile) {
-            return fileIO.readBufferAsync(storageFile);
-        })
-        .then(function(buffer) {
-            var strBase64 = encodeToBase64String(buffer);
-            var imageData = "data:" + file.contentType + ";base64," + strBase64;
-            var image = new Image();
-            image.src = imageData;
-            image.onload = function() {
-                var ratio = Math.min(targetWidth / this.width, targetHeight / this.height);
-                var imageWidth = ratio * this.width;
-                var imageHeight = ratio * this.height;
-
-                var canvas = document.createElement('canvas');
-                var storageFileName;
-
-                canvas.width = imageWidth;
-                canvas.height = imageHeight;
-
-                canvas.getContext("2d").drawImage(this, 0, 0, imageWidth, imageHeight);
-
-                var fileContent = canvas.toDataURL(targetContentType).split(',')[1];
-
-                var storageFolder = getAppData().localFolder;
-
-                storageFolder.createFileAsync(tempPhotoFileName, OptUnique)
-                    .then(function (storagefile) {
-                        var content = Windows.Security.Cryptography.CryptographicBuffer.decodeFromBase64String(fileContent);
-                        storageFileName = storagefile.name;
-                        return fileIO.writeBufferAsync(storagefile, content);
-                    })
-                    .done(function () {
-                        successCallback("ms-appdata:///local/" + storageFileName);
-                    }, errorCallback);
-            };
-        })
-        .done(null, function(err) {
-            errorCallback(err);
-        }
-    );
-}
-
 // Because of asynchronous method, so let the successCallback be called in it.
 function resizeImageBase64(successCallback, errorCallback, file, targetWidth, targetHeight) {
     fileIO.readBufferAsync(file).done( function(buffer) {
@@ -244,11 +187,13 @@ function takePictureFromCamera(successCallback, errorCallback, args) {
 
     // decide which max pixels should be supported by targetWidth or targetHeight.
     var maxRes = null;
+    var cropRes = allowCrop ? { width: targetWidth, height: targetHeight } : { width: 0, height: 0 };
     var UIMaxRes = WMCapture.CameraCaptureUIMaxPhotoResolution;
     var totalPixels = targetWidth * targetHeight;
 
     if (targetWidth == -1 && targetHeight == -1) {
         maxRes = UIMaxRes.highestAvailable;
+        cropRes = { width: 0, height: 0 };
     }
     // Temp fix for CB-10539
     /*else if (totalPixels <= 320 * 240) {
@@ -267,6 +212,7 @@ function takePictureFromCamera(successCallback, errorCallback, args) {
     }
 
     cameraCaptureUI.photoSettings.maxResolution = maxRes;
+    cameraCaptureUI.photoSettings.croppedSizeInPixels = cropRes;
 
     var cameraPicture;
 
@@ -294,28 +240,28 @@ function savePhoto(picture, options, successCallback, errorCallback) {
     // success callback for capture operation
     var success = function(picture) {
         if (options.destinationType == Camera.DestinationType.FILE_URI || options.destinationType == Camera.DestinationType.NATIVE_URI) {
-            if (options.targetHeight > 0 && options.targetWidth > 0) {
-                resizeImage(successCallback, errorCallback, picture, options.targetWidth, options.targetHeight, options.encodingType);
-            } else {
-                picture.copyAsync(getAppData().localFolder, picture.name, OptUnique).done(function (copiedFile) {
-                    successCallback("ms-appdata:///local/" + copiedFile.name);
-                },errorCallback);
-            }
+            //if (options.targetHeight > 0 && options.targetWidth > 0) {
+            //  resizeImage(successCallback, errorCallback, picture, options.targetWidth, options.targetHeight, options.encodingType);
+            //} else {
+            picture.copyAsync(getAppData().localFolder, picture.name, OptUnique).done(function(copiedFile) {
+                successCallback("ms-appdata:///local/" + copiedFile.name);
+            }, errorCallback);
+    //        }
         } else {
-            if (options.targetHeight > 0 && options.targetWidth > 0) {
-                resizeImageBase64(successCallback, errorCallback, picture, options.targetWidth, options.targetHeight);
-            } else {
-                fileIO.readBufferAsync(picture).done(function(buffer) {
-                    var strBase64 = encodeToBase64String(buffer);
-                    picture.deleteAsync().done(function() {
-                        successCallback(strBase64);
-                    }, function(err) {
-                        errorCallback(err);
-                    });
-                }, errorCallback);
-            }
-        }
-    };
+            //if (options.targetHeight > 0 && options.targetWidth > 0) {
+            //  resizeImageBase64(successCallback, errorCallback, picture, options.targetWidth, options.targetHeight);
+            //} else {
+            fileIO.readBufferAsync(picture).done(function(buffer) {
+                var strBase64 = encodeToBase64String(buffer);
+                picture.deleteAsync().done(function() {
+                successCallback(strBase64);
+                }, function(err) {
+                errorCallback(err);
+                });
+            }, errorCallback);
+    //        }
+      }
+  };
 
     if (!options.saveToPhotoAlbum) {
         success(picture);
