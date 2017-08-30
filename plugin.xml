@@ -24,7 +24,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     id="tabris-plugin-camera"
-    version="2.4.2-dev">
+    version="1.0.0">
     <name>Camera</name>
     <description>Tabris Camera Plugin</description>
     <license>Apache 2.0</license>
