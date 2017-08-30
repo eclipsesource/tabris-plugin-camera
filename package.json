@@ -1,6 +1,6 @@
 {
   "name": "tabris-plugin-camera",
-  "version": "2.4.2-dev",
+  "version": "1.0.0",
   "description": "Cordova Camera Plugin",
   "types": "./types/index.d.ts",
   "cordova": {
