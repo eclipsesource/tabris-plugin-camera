@@ -35,6 +35,12 @@ the system's image library.
 You can add this to your Tabris.js project by includin the followin line in your `config.xml`:
 
 ```xml
+<plugin name="tabris-plugin-camera" spec="1.0.0" />
+```
+
+To fetch the latest development version, use the URL of the repository:
+
+```xml
 <plugin name="tabris-plugin-camera" spec="https://github.com/eclipsesource/tabris-plugin-camera.git" />
 ```
 
@@ -52,9 +58,9 @@ In order for your changes to be accepted, you need to add yourself as a contribu
 Since iOS 10 it's mandatory to add a `NSCameraUsageDescription` and `NSPhotoLibraryUsageDescription` in the info.plist.
 
 - `NSCameraUsageDescription` describes the reason that the app accesses the user’s camera.
-- `NSPhotoLibraryUsageDescription` describes the reason the app accesses the user's photo library. 
+- `NSPhotoLibraryUsageDescription` describes the reason the app accesses the user's photo library.
 
-When the system prompts the user to allow access, this string is displayed as part of the dialog box. 
+When the system prompts the user to allow access, this string is displayed as part of the dialog box.
 
 To add this entry you can pass the following variables on plugin install.
 
@@ -140,7 +146,7 @@ __Supported Platforms__
 
 More examples [here](#camera-getPicture-examples). Quirks [here](#camera-getPicture-quirks).
 
-**Kind**: static method of <code>[camera](#module_camera)</code>  
+**Kind**: static method of <code>[camera](#module_camera)</code>
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -148,7 +154,7 @@ More examples [here](#camera-getPicture-examples). Quirks [here](#camera-getPict
 | errorCallback | <code>[onError](#module_camera.onError)</code> |  |
 | options | <code>[CameraOptions](#module_camera.CameraOptions)</code> | CameraOptions |
 
-**Example**  
+**Example**
 ```js
 navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
 ```
@@ -164,8 +170,8 @@ __Supported Platforms__
 
 - iOS
 
-**Kind**: static method of <code>[camera](#module_camera)</code>  
-**Example**  
+**Kind**: static method of <code>[camera](#module_camera)</code>
+**Example**
 ```js
 navigator.camera.cleanup(onSuccess, onFail);
 
@@ -182,7 +188,7 @@ function onFail(message) {
 ### camera.onError : <code>function</code>
 Callback function that provides an error message.
 
-**Kind**: static typedef of <code>[camera](#module_camera)</code>  
+**Kind**: static typedef of <code>[camera](#module_camera)</code>
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -193,13 +199,13 @@ Callback function that provides an error message.
 ### camera.onSuccess : <code>function</code>
 Callback function that provides the image data.
 
-**Kind**: static typedef of <code>[camera](#module_camera)</code>  
+**Kind**: static typedef of <code>[camera](#module_camera)</code>
 
 | Param | Type | Description |
 | --- | --- | --- |
 | imageData | <code>string</code> | Base64 encoding of the image data, _or_ the image file URI, depending on [`cameraOptions`](#module_camera.CameraOptions) in effect. |
 
-**Example**  
+**Example**
 ```js
 // Show image
 //
@@ -214,7 +220,7 @@ function cameraCallback(imageData) {
 Optional parameters to customize the camera settings.
 * [Quirks](#CameraOptions-quirks)
 
-**Kind**: static typedef of <code>[camera](#module_camera)</code>  
+**Kind**: static typedef of <code>[camera](#module_camera)</code>
 **Properties**
 
 | Name | Type | Default | Description |
@@ -246,7 +252,7 @@ _Note:_ On iOS passing `DestinationType.NATIVE_URI` along with
 disable any image modifications (resize, quality change, cropping, etc.) due
 to implementation specific.
 
-**Kind**: static enum property of <code>[Camera](#module_Camera)</code>  
+**Kind**: static enum property of <code>[Camera](#module_Camera)</code>
 **Properties**
 
 | Name | Type | Default | Description |
@@ -258,7 +264,7 @@ to implementation specific.
 <a name="module_Camera.EncodingType"></a>
 
 ### Camera.EncodingType : <code>enum</code>
-**Kind**: static enum property of <code>[Camera](#module_Camera)</code>  
+**Kind**: static enum property of <code>[Camera](#module_Camera)</code>
 **Properties**
 
 | Name | Type | Default | Description |
@@ -269,7 +275,7 @@ to implementation specific.
 <a name="module_Camera.MediaType"></a>
 
 ### Camera.MediaType : <code>enum</code>
-**Kind**: static enum property of <code>[Camera](#module_Camera)</code>  
+**Kind**: static enum property of <code>[Camera](#module_Camera)</code>
 **Properties**
 
 | Name | Type | Default | Description |
@@ -286,7 +292,7 @@ _Note:_ On iOS passing `PictureSourceType.PHOTOLIBRARY` or `PictureSourceType.SA
 along with `DestinationType.NATIVE_URI` will disable any image modifications (resize, quality
 change, cropping, etc.) due to implementation specific.
 
-**Kind**: static enum property of <code>[Camera](#module_Camera)</code>  
+**Kind**: static enum property of <code>[Camera](#module_Camera)</code>
 **Properties**
 
 | Name | Type | Default | Description |
@@ -300,21 +306,21 @@ change, cropping, etc.) due to implementation specific.
 ### Camera.PopoverArrowDirection : <code>enum</code>
 Matches iOS UIPopoverArrowDirection constants to specify arrow location on popover.
 
-**Kind**: static enum property of <code>[Camera](#module_Camera)</code>  
+**Kind**: static enum property of <code>[Camera](#module_Camera)</code>
 **Properties**
 
 | Name | Type | Default |
 | --- | --- | --- |
-| ARROW_UP | <code>number</code> | <code>1</code> | 
-| ARROW_DOWN | <code>number</code> | <code>2</code> | 
-| ARROW_LEFT | <code>number</code> | <code>4</code> | 
-| ARROW_RIGHT | <code>number</code> | <code>8</code> | 
-| ARROW_ANY | <code>number</code> | <code>15</code> | 
+| ARROW_UP | <code>number</code> | <code>1</code> |
+| ARROW_DOWN | <code>number</code> | <code>2</code> |
+| ARROW_LEFT | <code>number</code> | <code>4</code> |
+| ARROW_RIGHT | <code>number</code> | <code>8</code> |
+| ARROW_ANY | <code>number</code> | <code>15</code> |
 
 <a name="module_Camera.Direction"></a>
 
 ### Camera.Direction : <code>enum</code>
-**Kind**: static enum property of <code>[Camera](#module_Camera)</code>  
+**Kind**: static enum property of <code>[Camera](#module_Camera)</code>
 **Properties**
 
 | Name | Type | Default | Description |
@@ -355,7 +361,7 @@ __Supported Platforms__
 
 - iOS
 
-**Example**  
+**Example**
 ```js
 navigator.camera.getPicture(onSuccess, onFail,
 {
