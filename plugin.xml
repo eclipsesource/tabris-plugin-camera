@@ -61,7 +61,7 @@
         </config-file>
         <config-file target="AndroidManifest.xml" parent="application">
           <provider
-              android:name="androidx.core.content.FileProvider"
+              android:name="org.apache.cordova.camera.FileProvider"
               android:authorities="${applicationId}.provider"
               android:exported="false"
               android:grantUriPermissions="true" >
