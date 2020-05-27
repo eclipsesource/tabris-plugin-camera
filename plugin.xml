@@ -61,7 +61,7 @@
         </config-file>
         <config-file target="AndroidManifest.xml" parent="application">
           <provider
-              android:name="androidx.core.content.FileProvider"
+              android:name="org.apache.cordova.camera.FileProvider"
               android:authorities="${applicationId}.provider"
               android:exported="false"
               android:grantUriPermissions="true" >
@@ -74,6 +74,7 @@
         <source-file src="src/android/CameraLauncher.java" target-dir="src/org/apache/cordova/camera" />
         <source-file src="src/android/CordovaUri.java" target-dir="src/org/apache/cordova/camera" />
         <source-file src="src/android/FileHelper.java" target-dir="src/org/apache/cordova/camera" />
+        <source-file src="src/android/FileProvider.java" target-dir="src/org/apache/cordova/camera" />
         <source-file src="src/android/ExifHelper.java" target-dir="src/org/apache/cordova/camera" />
         <source-file src="src/android/xml/provider_paths.xml" target-dir="res/xml" />
 
